@@ -1,0 +1,2 @@
+Bağımlılık Enjeksiyonu Nedir?
+Bağımlılık enjeksiyonu, nesneler arasındaki bağımlılıkların, bu nesnelerin kendisi tarafından değil, dışarıdan yönetilmesini sağlar. Bu, uygulamayı daha esnek ve test edilebilir hale getirir.
