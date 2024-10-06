@@ -1,9 +1,13 @@
 package tr.com.mcay.springannotations.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
+@Tag(name = "HelloController", description = "HelloController API")
 /**
  * @RestController, RESTful web servisleri yazarken kullanılan bir annotation’dır.
  * @Controller ve @ResponseBody annotation’larını bir arada kullanır.
@@ -17,6 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 public class HelloController {
 
+
+    @Operation(summary = "GetMapping ile Hello", description = "GetMapping kullanarak bir hello mesajı döner.")
     /**
      * @GetMapping("/hello"): Bu anotasyon, HTTP GET isteklerini bu metoda yönlendirir.
      * Bir selamlama mesajı olarak basit bir yanıt döndürür.
