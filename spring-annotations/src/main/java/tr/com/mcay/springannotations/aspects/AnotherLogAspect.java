@@ -18,11 +18,11 @@ public class AnotherLogAspect {
 
     @Before("execution(* tr.com.mcay.springannotations.controller.*.*(..))")
     public void logBefore() {
-        System.out.println("AnotherLogAspect: Before Metot çalıştırıldı.");
+        System.out.println("Order 2 Aspect Before -> AnotherLogAspect: Before Metot çalıştırıldı.");
     }
 
     @After("execution(* tr.com.mcay.springannotations.controller.*.*(..))")
     public void logAfter() {
-        System.out.println("AnotherLogAspect: After Metot çalıştırıldı.");
+        System.out.println("Order 2 Aspect After ->AnotherLogAspect: After Metot çalıştırıldı.");
     }
 }
