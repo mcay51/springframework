@@ -2,9 +2,11 @@ package tr.com.mcay.springannotations.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import tr.com.mcay.springannotations.service.HelloService;
 
 
 @Tag(name = "HelloController", description = "HelloController API")
@@ -20,7 +22,21 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RequestMapping("/api")
 public class HelloController {
+    private final HelloService helloService;
 
+    /**
+     * @Autowired: Servis katmanını otomatik olarak inject eder.
+     */
+    @Autowired
+    public HelloController(HelloService helloService) {
+        this.helloService = helloService;
+    }
+
+    @Operation(summary = "Servis katmanından merhaba mesajı alır", description = "HelloService'den gelen merhaba mesajını döner.")
+    @GetMapping("/helloService")
+    public String helloFromService() {
+        return helloService.getHelloMessage();
+    }
 
     @Operation(summary = "GetMapping ile Hello", description = "GetMapping kullanarak bir hello mesajı döner.")
     /**
@@ -31,5 +47,9 @@ public class HelloController {
     public String hello(){
         return "Hello World";
     }
+
+
+
+
 
 }
