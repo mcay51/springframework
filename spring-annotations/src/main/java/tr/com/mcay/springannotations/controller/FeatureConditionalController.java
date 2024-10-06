@@ -15,8 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class FeatureConditionalController {
     private final String featureXBean;
 
-    public FeatureConditionalController(@Autowired(required = false) String featureXBean) {
+    private final String defaultService;
+
+    public FeatureConditionalController(@Autowired(required = false) String featureXBean,
+                                        @Autowired(required = false)String defaultService) {
         this.featureXBean = featureXBean;
+        this.defaultService = defaultService;
     }
 
     /**
@@ -28,6 +32,12 @@ public class FeatureConditionalController {
     @Operation(summary = "@ConditionalOnProperty Properties dosyasında feature.x.enabled=true ise FeatureConfig sınıfını yükler", description = "@ConditionalOnProperty Properties dosyasında feature.x.enabled=true ise FeatureConfig sınıfını yükler")
     public String getFeatures() {
         return "FeatureX: " + featureXBean;
+    }
+
+    @GetMapping("/conditional-on-missing")
+    @Operation(summary = "@ConditionalOnMissing uygulamada myService adında bir bean yok ise defaultService bean i yüklemeyi sağlayan kontrol", description = "@ConditionalOnMissing uygulamada myService adında bir bean yok ise defaultService bean i yüklemeyi sağlayan kontrol")
+    public String getConditionalOnMissing() {
+        return "Default Service: " + defaultService;
     }
 
 }
