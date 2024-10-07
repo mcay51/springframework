@@ -8,9 +8,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class ScheduledTaskService {
     /**
-     * @Scheduled: Bu metod her 5 saniyede bir çalışacak şekilde ayarlanmıştır.
+     * @Scheduled: Bu metod her saat te bir çalışacak şekilde ayarlanmıştır.
      */
-    @Scheduled(fixedRate = 5000)
+    @Scheduled(fixedRate = 600000)
     public void performTask() {
         System.out.println("Zamanlanmış görev çalışıyor: " + System.currentTimeMillis());
     }
