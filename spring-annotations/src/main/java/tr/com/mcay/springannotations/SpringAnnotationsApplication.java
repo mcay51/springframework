@@ -3,6 +3,7 @@ package tr.com.mcay.springannotations;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
  * @SpringBootApplication, Spring Boot uygulaması için en temel annotation’dır. Bu, aslında üç annotation'ın birleşimidir:
@@ -14,6 +15,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 
 @SpringBootApplication
 @EnableAsync
+@EnableScheduling  // Zamanlanmış görevleri etkinleştirir
 public class SpringAnnotationsApplication {
     // @SpringBootApplication: Bu annotation, Spring Boot uygulamasının başlangıç noktasıdır. Uygulama başlarken SpringApplication.run() ile başlatılır.
     public static void main(String[] args) {
