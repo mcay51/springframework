@@ -1,6 +1,7 @@
 package tr.com.mcay.springannotations.order.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import tr.com.mcay.springannotations.order.dto.OrderDTO;
@@ -88,6 +89,33 @@ public class OrderService {
     public void processSubOrder(OrderDTO subOrderDTO) {
         // Mevcut bir işlemin (Transaction) içinde yeni bir "nested" işlem açar. Eğer bu işlem başarısız olursa sadece bu alt işlem geri alınır.
     }
+
+    @Transactional(isolation = Isolation.READ_UNCOMMITTED)
+    public void lowIsolationOperation() {
+        // Diğer işlemlerin henüz commit etmediği veriler okunabilir.
+        //En düşük yalıtım seviyesi. Bir işlem henüz commit edilmeden başka işlemler tarafından görülebilir.
+        // Bu seviyede dirty read mümkündür (başka bir işlemin henüz commit etmediği değişiklikleri okumak).
+    }
+    @Transactional(isolation = Isolation.READ_COMMITTED)
+    public void safeReadOperation() {
+        // Commit edilmiş veriler okunur.
+        // Sadece commit edilmiş veriler okunabilir. Dirty read engellenir.
+    }
+    @Transactional(isolation = Isolation.REPEATABLE_READ)
+    public void consistentReadOperation() {
+        // Tekrarlanan okumalarda aynı sonuç alınır.
+        // Aynı işlem boyunca aynı satır tekrar okunduğunda aynı veriler alınır.
+        // Bu, non-repeatable read hatalarını engeller (aynı verinin tekrar okunduğunda farklı olması).
+    }
+    @Transactional(isolation = Isolation.SERIALIZABLE)
+    public void highIsolationOperation() {
+        // Tüm işlemler sıralı ve tam yalıtımlıdır.
+        // En yüksek yalıtım seviyesi. Tüm işlemler sıralı bir şekilde gerçekleştirilir,
+        // bu da performans açısından pahalıdır ancak tüm veri tutarsızlıklarını engeller.
+    }
+
+
+
 
 
 
