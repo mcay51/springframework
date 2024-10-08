@@ -39,13 +39,15 @@ public class OrderService {
 
         // Siparişi veritabanına kaydetme işlemi
         Order savedOrder = orderRepository.save(order);
-
-        // Ürün stoğunu güncelleme işlemi
+            // Ürün stoğunu güncelleme işlemi
         for (Product product : order.getProducts()) {
             if (product.getPrice() <= 0) {
                 throw new IllegalArgumentException("Ürün fiyatı sıfırdan büyük olmalıdır.");
             }
             productRepository.save(product);
+        }
+
+
         }
 
         return orderMapper.orderToOrderDTO(savedOrder);

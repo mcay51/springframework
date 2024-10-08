@@ -5,7 +5,7 @@ import jakarta.persistence.Table;
 import tr.com.mcay.springannotations.model.BaseEntity;
 
 @Entity
-@Table("tbl_product")
+@Table(name="tbl_product")
 public class Product extends BaseEntity {
     private String name;
     private double price;
