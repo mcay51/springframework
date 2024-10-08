@@ -12,6 +12,9 @@ import tr.com.mcay.springannotations.product.dto.ProductDTO;
 import tr.com.mcay.springannotations.product.model.Product;
 import tr.com.mcay.springannotations.product.repository.ProductRepository;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
  * @Transactional, Spring'in işlem yönetimini (transaction management) sağlamasına olanak tanır.
  * Bu anotasyon sayesinde bir iş parçası bir bütün olarak ya başarılı olur ya da tamamen başarısız olur.
@@ -52,6 +55,18 @@ public class OrderService {
         }
 
         return orderMapper.orderToOrderDTO(savedOrder);
+    }
+
+    /**
+     * Okuma işlemleri için gereksiz yazma kilitlerini önlemek amacıyla işlemleri "read-only" olarak işaretleyebiliriz.
+     * Bu, performansı iyileştirir ve bazı optimizasyonlara olanak sağlar.
+     * @return
+     */
+    @Transactional(readOnly = true)
+    public List<OrderDTO> getAllOrders() {
+        return orderRepository.findAll().stream()
+                .map(orderMapper::orderToOrderDTO)
+                .collect(Collectors.toList());
     }
 
     /**
