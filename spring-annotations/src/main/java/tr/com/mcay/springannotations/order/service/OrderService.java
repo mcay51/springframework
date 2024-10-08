@@ -1,11 +1,13 @@
 package tr.com.mcay.springannotations.order.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import tr.com.mcay.springannotations.order.dto.OrderDTO;
 import tr.com.mcay.springannotations.order.mapper.OrderMapper;
 import tr.com.mcay.springannotations.order.model.Order;
 import tr.com.mcay.springannotations.order.repository.OrderRepository;
+import tr.com.mcay.springannotations.product.dto.ProductDTO;
 import tr.com.mcay.springannotations.product.model.Product;
 import tr.com.mcay.springannotations.product.repository.ProductRepository;
 
@@ -21,6 +23,7 @@ public class OrderService {
     private final OrderRepository orderRepository;
     private final ProductRepository productRepository;
     private final OrderMapper orderMapper;
+
     public OrderService(OrderRepository orderRepository, ProductRepository productRepository, OrderMapper orderMapper) {
         this.orderRepository = orderRepository;
         this.productRepository = productRepository;
@@ -28,10 +31,10 @@ public class OrderService {
     }
 
     /**
-     * @Transactional anotasyonu placeOrder metodu üzerinde tanımlı. Bu metot, hem siparişi kaydetmekte hem de ürünleri güncellemektedir.
-     * Eğer ürünlerden birinin fiyatı sıfır veya negatifse, hata atılarak tüm işlem geri alınır (rollback yapılır).
      * @param orderDTO
      * @return
+     * @Transactional anotasyonu placeOrder metodu üzerinde tanımlı. Bu metot, hem siparişi kaydetmekte hem de ürünleri güncellemektedir.
+     * Eğer ürünlerden birinin fiyatı sıfır veya negatifse, hata atılarak tüm işlem geri alınır (rollback yapılır).
      */
     @Transactional
     public OrderDTO placeOrder(OrderDTO orderDTO) {
@@ -39,7 +42,7 @@ public class OrderService {
 
         // Siparişi veritabanına kaydetme işlemi
         Order savedOrder = orderRepository.save(order);
-            // Ürün stoğunu güncelleme işlemi
+        // Ürün stoğunu güncelleme işlemi
         for (Product product : order.getProducts()) {
             if (product.getPrice() <= 0) {
                 throw new IllegalArgumentException("Ürün fiyatı sıfırdan büyük olmalıdır.");
@@ -47,9 +50,48 @@ public class OrderService {
             productRepository.save(product);
         }
 
-
-        }
-
         return orderMapper.orderToOrderDTO(savedOrder);
     }
+
+    /**
+     * İşlem Yayılımı (Propagation)
+     * Propagation, bir işlemin (transaction) başka bir işlem çağırdığında nasıl davranacağını belirler. Spring, 7 farklı işlem yayılım türü sunar:
+     * @param orderDTO
+     */
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void processOrder(OrderDTO orderDTO) {
+        // Mevcut bir işlem (Transaction) varsa devam edilir, yoksa yeni bir işlem açılır.
+    }
+
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public void createOrder(OrderDTO invoiceDTO) {
+        // Mevcut bir işlem (Transaction) varsa dondurulur ve yeni bir işlem başlatılır.
+    }
+
+    @Transactional(propagation = Propagation.SUPPORTS)
+    public void getOrderDetails(Long orderId) {
+        // İşlem (Transaction) varsa işlem içinde, yoksa işlemsiz çalışır.
+    }
+    @Transactional(propagation = Propagation.NOT_SUPPORTED)
+    public void logProduct(ProductDTO auditDTO) {
+        // Mevcut işlem (Transaction) varsa askıya alınır ve işlemsiz çalışılır.
+    }
+    @Transactional(propagation = Propagation.MANDATORY)
+    public void updateProduct(ProductDTO stockDTO) {
+        // İşlem (Transaction) olmadan çağrılırsa Exception fırlatılır.
+    }
+    @Transactional(propagation = Propagation.NEVER)
+    public void nonTransactionalOperation() {
+        // İşlem (Transaction) olmadan çalışır, eğer işlem varsa hata fırlatır.
+    }
+    @Transactional(propagation = Propagation.NESTED)
+    public void processSubOrder(OrderDTO subOrderDTO) {
+        // Mevcut bir işlemin (Transaction) içinde yeni bir "nested" işlem açar. Eğer bu işlem başarısız olursa sadece bu alt işlem geri alınır.
+    }
+
+
+
+
+
+
 }
