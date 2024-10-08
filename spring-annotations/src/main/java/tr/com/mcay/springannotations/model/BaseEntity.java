@@ -4,6 +4,10 @@ import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
+/**
+ * BaseEntity, tüm varlık sınıfları için ortak alanları barındıran bir MappedSuperclass olacaktır.
+ * Her varlık bu sınıftan miras alarak ID, oluşturulma ve güncellenme zamanlarını yönetecek.
+ */
 @MappedSuperclass
 public class BaseEntity {
     @Id
