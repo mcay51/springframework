@@ -1,13 +1,13 @@
-package tr.com.mcay.errorcodes;
+package tr.com.mcay.errorcodesimulation;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ErrorCodesApplication {
+public class ErrorCodeSimulationApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ErrorCodesApplication.class, args);
+        SpringApplication.run(ErrorCodeSimulationApplication.class, args);
     }
 
 }
