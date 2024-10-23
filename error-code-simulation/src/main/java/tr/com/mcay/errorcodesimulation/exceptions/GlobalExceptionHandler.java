@@ -1,4 +1,4 @@
-package tr.com.mcay.errorcodes.exceptions;
+package tr.com.mcay.errorcodesimulation.exceptions;
 
 
 import org.springframework.http.HttpStatus;
@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
-import tr.com.mcay.errorcodes.exceptions.model.ErrorResponse;
+import tr.com.mcay.errorcodesimulation.exceptions.model.ErrorResponse;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {

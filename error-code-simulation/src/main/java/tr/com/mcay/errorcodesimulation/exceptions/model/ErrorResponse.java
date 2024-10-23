@@ -1,4 +1,4 @@
-package tr.com.mcay.errorcodes.exceptions.model;
+package tr.com.mcay.errorcodesimulation.exceptions.model;
 
 import java.time.LocalDateTime;
 
