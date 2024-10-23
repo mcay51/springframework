@@ -12,7 +12,7 @@ import tr.com.mcay.errorcodesimulation.service.Simulation1xxExceptionService;
 
 @RestController
 @RequestMapping("/api/v1/simulation")
-@Tag(name = "Simulation API 1XX", description = "1xx hata kodlarının simülasyonu için API")
+@Tag(name = "1xx Simulation API", description = "1xx hata kodlarının simülasyonu için API")
 public class Simulation1xxExceptionController {
     private final Simulation1xxExceptionService simulationService;
     public Simulation1xxExceptionController(Simulation1xxExceptionService simulationService) {

@@ -12,7 +12,7 @@ import tr.com.mcay.errorcodesimulation.service.ClientErrorSimulationService;
 
 @RestController
 @RequestMapping("/api/v1/error-simulation")
-@Tag(name = "Client Error Simulation API 4xx", description = "4xx hata kodlarının simülasyonu için API")
+@Tag(name = "4xx Client Error Simulation API", description = "4xx hata kodlarının simülasyonu için API")
 public class ClientErrorSimulationController {
 
     private final ClientErrorSimulationService errorSimulationService;

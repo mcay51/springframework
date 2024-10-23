@@ -13,7 +13,7 @@ import tr.com.mcay.errorcodesimulation.service.SuccessSimulationService;
 
 @RestController
 @RequestMapping("/api/v1/success-simulation")
-@Tag(name = "Simulation API Success 2xx", description = "2xx başarı kodlarının simülasyonu için API")
+@Tag(name = "2xx Simulation API Success", description = "2xx başarı kodlarının simülasyonu için API")
 public class SuccessSimulationController {
 
     private final SuccessSimulationService successSimulationService;

@@ -13,7 +13,7 @@ import tr.com.mcay.errorcodesimulation.service.RedirectSimulationService;
 
 @RestController
 @RequestMapping("/api/v1/redirect-simulation")
-@Tag(name = "Redirect Simulation API 3xx", description = "3xx yönlendirme kodlarının simülasyonu için API")
+@Tag(name = "3xx Redirect Simulation API", description = "3xx yönlendirme kodlarının simülasyonu için API")
 public class RedirectSimulationController {
 
     private final RedirectSimulationService redirectSimulationService;
