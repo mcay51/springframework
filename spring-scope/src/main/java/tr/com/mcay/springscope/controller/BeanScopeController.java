@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import tr.com.mcay.springscope.service.RequestBean;
 import tr.com.mcay.springscope.service.SingletonBean;
 import tr.com.mcay.springscope.service.factory.PrototypeBeanFactory;
 
@@ -16,7 +17,7 @@ public class BeanScopeController {
     private SingletonBean singletonBean;
     private PrototypeBeanFactory prototypeBeanFactory;
 
-    public BeanScopeController(SingletonBean singletonBean, PrototypeBeanFactory prototypeBeanFactory) {
+    public BeanScopeController(SingletonBean singletonBean, PrototypeBeanFactory prototypeBeanFactory, RequestBean requestBean) {
         this.singletonBean = singletonBean;
         this.prototypeBeanFactory = prototypeBeanFactory;
     }
@@ -32,5 +33,4 @@ public class BeanScopeController {
         // Her metot çağrısında yeni bir PrototypeBean oluşturuluyor.
         return prototypeBeanFactory.getPrototypeBean().getMessage();
     }
-
 }
