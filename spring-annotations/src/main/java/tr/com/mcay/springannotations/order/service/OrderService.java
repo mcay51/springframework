@@ -1,5 +1,7 @@
 package tr.com.mcay.springannotations.order.service;
 
+import org.springframework.cglib.core.Local;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
@@ -9,9 +11,13 @@ import tr.com.mcay.springannotations.order.mapper.OrderMapper;
 import tr.com.mcay.springannotations.order.model.Order;
 import tr.com.mcay.springannotations.order.repository.OrderRepository;
 import tr.com.mcay.springannotations.product.dto.ProductDTO;
+import tr.com.mcay.springannotations.product.mapper.ProductMapper;
 import tr.com.mcay.springannotations.product.model.Product;
 import tr.com.mcay.springannotations.product.repository.ProductRepository;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,14 +32,49 @@ import java.util.stream.Collectors;
 public class OrderService {
     private final OrderRepository orderRepository;
     private final ProductRepository productRepository;
-    private final OrderMapper orderMapper;
+
 
     public OrderService(OrderRepository orderRepository, ProductRepository productRepository, OrderMapper orderMapper) {
         this.orderRepository = orderRepository;
         this.productRepository = productRepository;
-        this.orderMapper = orderMapper;
+    }
+    @Scheduled(fixedRate = 600000)//10 dakikada 1 kez çalışır
+    public void performTaskIsa() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
+        LocalDateTime startTime = LocalDateTime.now();
+        System.out.println("Zamanlanmış görev çalışıyor: " + startTime.format(formatter));
+        OrderDTO orderDTO;
+        for(int i=0;i<100;i++){
+            orderDTO= placeOrder(getOrder());
+            System.out.println(orderDTO.getCustomerName()+
+                    " için Sipariş "+i+" Eklendi.");
+        }
+        LocalDateTime endTime = LocalDateTime.now();
+        System.out.println("Zamanlanmış görev Başlangıç: " + startTime.format(formatter));
+        System.out.println("Zamanlanmış görev tamamlandı : " + endTime.format(formatter));
     }
 
+    private OrderDTO getOrder(){
+        OrderDTO order = new OrderDTO();
+        order.setCustomerName("Mustafa ÇAY");
+        order.setProducts(getProducts());
+        order.setCreatedAt(LocalDateTime.now());
+        order.setUpdatedAt(LocalDateTime.now());
+        return  order;
+    }
+    private List<ProductDTO> getProducts(){
+        ProductDTO product ;
+        List<ProductDTO> products = new ArrayList<>();
+        for(int i=0;i<500;i++){
+            product= new ProductDTO();
+            product.setName("Kazak-"+i);
+            product.setPrice(2000d);
+            product.setCreatedAt(LocalDateTime.now());
+            product.setUpdatedAt(LocalDateTime.now());
+            products.add(product);
+        }
+      return products;
+    }
     /**
      * @param orderDTO
      * @return
@@ -42,19 +83,22 @@ public class OrderService {
      */
     @Transactional
     public OrderDTO placeOrder(OrderDTO orderDTO) {
-        Order order = orderMapper.orderDTOToOrder(orderDTO);
-
+        Order order = OrderMapper.INSTANCE.orderDTOToOrder(orderDTO);
+        List<Product> products =new ArrayList<>();
+        for(ProductDTO productDTO : orderDTO.getProducts()){
+            products.add(ProductMapper.INSTANCE.productDTOToProduct(productDTO)) ;
+        }
         // Siparişi veritabanına kaydetme işlemi
         Order savedOrder = orderRepository.save(order);
         // Ürün stoğunu güncelleme işlemi
-        for (Product product : order.getProducts()) {
+        for (Product product : products) {
             if (product.getPrice() <= 0) {
                 throw new IllegalArgumentException("Ürün fiyatı sıfırdan büyük olmalıdır.");
             }
             productRepository.save(product);
         }
 
-        return orderMapper.orderToOrderDTO(savedOrder);
+        return OrderMapper.INSTANCE.orderToOrderDTO(savedOrder);
     }
 
     /**
@@ -65,7 +109,7 @@ public class OrderService {
     @Transactional(readOnly = true)
     public List<OrderDTO> getAllOrders() {
         return orderRepository.findAll().stream()
-                .map(orderMapper::orderToOrderDTO)
+                .map(OrderMapper.INSTANCE::orderToOrderDTO)
                 .collect(Collectors.toList());
     }
 
