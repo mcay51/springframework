@@ -8,13 +8,17 @@ import org.springframework.stereotype.Component;
 public class CustomBeanPostProcessor implements BeanPostProcessor {
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-        System.out.println("Before Initialization: " + beanName);
+        if("singletonBean".equals(beanName)) {
+            System.out.println("Before Initialization: " + beanName);
+        }
         return bean; // Bean'ı döndürün (üzerinde değişiklik yapmadığınız sürece)
     }
 
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-        System.out.println("After Initialization: " + beanName);
+        if("singletonBean".equals(beanName)) {
+            System.out.println("After Initialization: " + beanName);
+        }
         return bean; // Bean'ı döndürün (üzerinde değişiklik yapmadığınız sürece)
     }
 }
