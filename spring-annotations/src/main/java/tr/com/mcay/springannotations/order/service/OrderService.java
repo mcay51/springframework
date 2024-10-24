@@ -44,7 +44,7 @@ public class OrderService {
         LocalDateTime startTime = LocalDateTime.now();
         System.out.println("Zamanlanmış görev çalışıyor: " + startTime.format(formatter));
         OrderDTO orderDTO;
-        for(int i=0;i<100;i++){
+        for(int i=0;i<5;i++){
             orderDTO= placeOrder(getOrder());
             System.out.println(orderDTO.getCustomerName()+
                     " için Sipariş "+i+" Eklendi.");
@@ -65,7 +65,7 @@ public class OrderService {
     private List<ProductDTO> getProducts(){
         ProductDTO product ;
         List<ProductDTO> products = new ArrayList<>();
-        for(int i=0;i<500;i++){
+        for(int i=0;i<10;i++){
             product= new ProductDTO();
             product.setName("Kazak-"+i);
             product.setPrice(2000d);
