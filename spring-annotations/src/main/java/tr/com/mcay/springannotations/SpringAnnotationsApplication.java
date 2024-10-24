@@ -2,7 +2,7 @@ package tr.com.mcay.springannotations;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.boot.autoconfigure.mail.MailSenderAutoConfiguration;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.retry.annotation.EnableRetry;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -16,7 +16,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  * @EnableAsync: Asenkron işlemleri etkinleştirir.
  */
 
-@SpringBootApplication
+@SpringBootApplication(exclude = { MailSenderAutoConfiguration.class })
 @EnableAsync
 @EnableScheduling  // Zamanlanmış görevleri etkinleştirir
 @EnableRetry  // Hata fırlatan metodun belirlenen deneme sayısı kadar tekrar çalıştırılabilmesi için Retry işlemini etkinleştirir
