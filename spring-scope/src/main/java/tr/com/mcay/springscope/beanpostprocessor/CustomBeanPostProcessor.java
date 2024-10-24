@@ -10,7 +10,8 @@ public class CustomBeanPostProcessor implements BeanPostProcessor {
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
         if("singletonBean".equals(beanName)||
                 "prototypeBean".equals(beanName)||
-                "requestBean".equals(beanName)) {
+                "requestBean".equals(beanName)||
+                "sessionBean".equals(beanName)) {
             System.out.println("Before Initialization: " + beanName);
         }
         return bean; // Bean'ı döndürün (üzerinde değişiklik yapmadığınız sürece)
@@ -20,7 +21,8 @@ public class CustomBeanPostProcessor implements BeanPostProcessor {
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
         if("singletonBean".equals(beanName)||
                 "prototypeBean".equals(beanName)||
-                "requestBean".equals(beanName)) {
+                "requestBean".equals(beanName)||
+                "sessionBean".equals(beanName)) {
             System.out.println("After Initialization: " + beanName);
         }
         return bean; // Bean'ı döndürün (üzerinde değişiklik yapmadığınız sürece)
