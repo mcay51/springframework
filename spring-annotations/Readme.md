@@ -86,3 +86,147 @@ Proje içerisinde **MapStruct** kullanılarak DTO yapıları oluşturulmuştur. 
 
 ## Veritabanı Konfigürasyonu
 Proje **PostgreSQL** veritabanı kullanılarak yapılandırılmıştır. Aşağıdaki ayarlar `application.properties` dosyasındadır.
+
+# Kullanılan Anotasyonlar
+
+## @SpringBootApplication
+- `SpringAnnotationsApplication`
+
+## @RestController
+- `HelloController`
+- `AppInfoController`
+- `OrderController`
+- `FeatureConditionalClassController`
+- `FeatureConditionalController`
+- `PersonController`
+- `ResourceController`
+- `AsyncController`
+- `CachingController`
+- `PaymentController`
+- `OrderComponentController`
+- `BeanScopeController`
+- `AdvancedController`
+- `EventController`
+- `ConfigurationPropertiesController`
+
+## @Service
+- `AppInfoService`
+- `HelloService`
+- `RegularPaymentService`
+- `DevOrderService`
+- `ProdOrderService`
+- `PersonServiceImpl`
+- `EventListenerService`
+- `EventPublisherService`
+- `AsyncService`
+- `CachingService`
+- `CircuitBreakerService`
+- `RetryService`
+- `SessionScopeService`
+- `RequestScopeService`
+- `PrototypeService`
+- `SingletonService`
+
+## @Component
+- `LazyResourceService`
+- `FirstComponent`
+- `SecondComponent`
+- `LoggingAspect`
+- `AnotherLogAspect`
+- `CustomBeanPostProcessor`
+
+## @Repository
+- `PersonRepository`
+- `ProductRepository`
+
+## @Configuration
+- `DataSourceConfig`
+- `ClassConditionConfig`
+- `MissingBeanConfig`
+- `AppConfig`
+
+## @Autowired
+- `HelloController`
+- `AppInfoController`
+- `OrderController`
+- `FeatureConditionalClassController`
+- `FeatureConditionalController`
+- `PersonController`
+- `EventController`
+- `ConfigurationPropertiesController`
+- `EventPublisherService`
+- `AsyncController`
+- `CachingController`
+- `BeanScopeController`
+- `AdvancedController`
+
+## @Value
+- `AppInfoService`
+
+## @Scheduled
+- `ScheduledTaskService`
+- `OrderService`
+
+## @Transactional
+- `OrderService`
+
+## @Cacheable
+- `CachingService`
+
+## @Profile
+- `DevOrderService`
+- `ProdOrderService`
+
+## @Conditional
+- `DataSourceConfig`
+- `ClassConditionConfig`
+- `MissingBeanConfig`
+
+## @Order
+- `FirstComponent`
+- `SecondComponent`
+- `LoggingAspect`
+- `AnotherLogAspect`
+
+## @EventListener
+- `EventListenerService`
+
+## @Async
+- `AsyncService`
+
+## @Retryable
+- `RetryService`
+
+## @CircuitBreaker
+- `CircuitBreakerService`
+
+## @PostConstruct
+- `FirstComponent`
+
+## @PreDestroy
+- `FirstComponent`
+
+## @Scope
+- `SessionScopeService`
+- `RequestScopeService`
+- `PrototypeService`
+- `SingletonService`
+
+## @Mapper
+- `PersonMapper`
+
+## @Operation
+- `HelloController`
+- `AppInfoController`
+- `OrderController`
+- `FeatureConditionalClassController`
+- `FeatureConditionalController`
+- `PersonController`
+- `EventController`
+- `ConfigurationPropertiesController`
+- `CachingController`
+- `AsyncController`
+- `PaymentController`
+- `BeanScopeController`
+- `AdvancedController`
+- `OrderComponentController`
