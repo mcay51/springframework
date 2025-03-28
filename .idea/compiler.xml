@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="dependency-injection" />
+        <module name="error-code-simulation" />
+        <module name="spring-scope" />
+        <module name="aspect-oriented-programming" />
+        <module name="reflection-simulation" />
+        <module name="spring-annotations" />
+        <module name="spring-interceptor" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="aspect-oriented-programming" target="1.5" />
+      <module name="dependency-injection" target="1.5" />
+      <module name="error-code-simulation" target="17" />
+      <module name="reflection-simulation" target="1.5" />
+      <module name="spring-annotations" target="1.5" />
+      <module name="spring-interceptor" target="1.5" />
+      <module name="spring-scope" target="1.5" />
+      <module name="springframework" target="17" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="error-code-simulation" options="-parameters" />
+    </option>
+  </component>
+</project>

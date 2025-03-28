@@ -1,26 +1,47 @@
 package tr.com.mcay.errorcodesimulation.service.impl;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+
+import tr.com.mcay.errorcodesimulation.exceptions.ClientErrorException;
 import tr.com.mcay.errorcodesimulation.service.ClientErrorSimulationService;
+
 @Service
 public class ClientErrorSimulationServiceImpl implements ClientErrorSimulationService {
+
     @Override
     public String simulate400BadRequest() {
-        return "Custom 400 Bad Request: İstemciden gelen istek geçersiz.";
+        throw new ClientErrorException(
+            HttpStatus.BAD_REQUEST,
+            "BAD_REQUEST",
+            "İstemciden gelen istek geçersiz."
+        );
     }
 
     @Override
     public String simulate401Unauthorized() {
-        return "Custom 401 Unauthorized: İstek yetkilendirilmemiş.";
+        throw new ClientErrorException(
+            HttpStatus.UNAUTHORIZED,
+            "UNAUTHORIZED",
+            "İstek yetkilendirilmemiş."
+        );
     }
 
     @Override
     public String simulate403Forbidden() {
-        return "Custom 403 Forbidden: İstemci isteği yasaklı bir kaynak için.";
+        throw new ClientErrorException(
+            HttpStatus.FORBIDDEN,
+            "FORBIDDEN",
+            "İstemci isteği yasaklı bir kaynak için."
+        );
     }
 
     @Override
     public String simulate404NotFound() {
-        return "Custom 404 Not Found: İstenen kaynak bulunamadı.";
+        throw new ClientErrorException(
+            HttpStatus.NOT_FOUND,
+            "NOT_FOUND",
+            "İstenen kaynak bulunamadı."
+        );
     }
 }

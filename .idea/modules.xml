@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/aspect-oriented-programming/aspect-oriented-programming.iml" filepath="$PROJECT_DIR$/aspect-oriented-programming/aspect-oriented-programming.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dependency-injection/dependency-injection.iml" filepath="$PROJECT_DIR$/dependency-injection/dependency-injection.iml" />
+      <module fileurl="file://$PROJECT_DIR$/error-code-simulation/error-code-simulation.iml" filepath="$PROJECT_DIR$/error-code-simulation/error-code-simulation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/reflection-simulation/reflection-simulation.iml" filepath="$PROJECT_DIR$/reflection-simulation/reflection-simulation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-annotations/spring-annotations.iml" filepath="$PROJECT_DIR$/spring-annotations/spring-annotations.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-interceptor/spring-interceptor.iml" filepath="$PROJECT_DIR$/spring-interceptor/spring-interceptor.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-scope/spring-scope.iml" filepath="$PROJECT_DIR$/spring-scope/spring-scope.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/springframework.iml" filepath="$PROJECT_DIR$/.idea/springframework.iml" />
+    </modules>
+  </component>
+</project>
